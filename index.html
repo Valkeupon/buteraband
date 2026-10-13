@@ -130,6 +130,9 @@
   .date-row .when{color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap;min-width:130px}
   .date-row .where{flex:1}
   .date-row .city{color:var(--muted);font-size:.85rem}
+  .date-status{display:none;margin-left:12px;padding:4px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.12);color:var(--muted);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+  .date-row-link.is-past .date-row{opacity:.72}
+  .date-row-link.is-past .date-status{display:inline-flex;border-color:rgba(201,133,95,.45);color:var(--accent)}
   .empty{color:var(--muted);font-style:italic;padding:24px 0}
 
   /* Dates — fond photo plein écran */
@@ -161,10 +164,52 @@
   .bio-desc{color:var(--fg);opacity:.85;margin-bottom:12px;max-width:640px}
 
   /* Album */
-  .album-block{max-width:640px}
-  .album-meta{color:var(--muted);font-size:.85rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:18px}
-  .album-title{font-size:1.5rem;font-weight:700;letter-spacing:.05em;line-height:1.35;margin-bottom:16px}
+  .album-layout{
+    display:grid;
+    grid-template-columns:minmax(220px,340px) 1fr;
+    align-items:stretch;
+    border:1px solid var(--line);
+    background:linear-gradient(180deg, rgba(16,16,18,.55), rgba(16,16,18,.2));
+  }
+  .album-vinyl-wrap{
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:clamp(28px,4vw,44px);
+    background:radial-gradient(circle at 50% 42%, rgba(201,70,45,.18) 0%, transparent 65%);
+    border-right:1px solid var(--line);
+  }
+  .album-vinyl{
+    position:relative;
+    width:100%;
+    max-width:300px;
+    height:auto;
+    display:block;
+    filter:drop-shadow(0 22px 30px rgba(0,0,0,.5));
+    transition:transform .3s ease;
+  }
+  .album-layout:hover .album-vinyl{transform:scale(1.03)}
+  .album-block{
+    max-width:560px;
+    padding:clamp(28px,4vw,40px);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+  .album-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+  .album-tag{
+    border:1px solid var(--line);
+    padding:6px 14px;
+    font-size:.72rem;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+  .album-title{font-size:clamp(1.35rem,2.2vw,1.7rem);font-weight:700;letter-spacing:.04em;line-height:1.35;margin-bottom:16px}
   .album-desc{color:var(--fg);opacity:.85;margin-bottom:12px}
+  .album-format{color:var(--muted);font-size:.85rem;letter-spacing:.05em}
+  .album-cta{margin-top:24px;align-self:flex-start}
 
   /* Boutique */
   .merch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
@@ -262,7 +307,18 @@
     transition:border-color .25s,background .25s,color .25s;
   }
   .listen-btn:hover{border-color:var(--accent);background:var(--accent);color:#fff}
-  .vinyl-btn{border-color:var(--accent);background:var(--accent);color:#fff}
+  .vinyl-btn{
+    border-color:var(--accent);background:var(--accent);color:#fff;
+    transition:transform .3s ease,box-shadow .3s ease;
+  }
+  .vinyl-btn:hover{
+    animation:vinyl-pulse 1.2s ease-in-out infinite;
+    transform:translateY(-3px);
+  }
+  @keyframes vinyl-pulse{
+    0%,100%{box-shadow:0 6px 18px rgba(201,70,45,.25)}
+    50%{box-shadow:0 10px 32px rgba(201,70,45,.55)}
+  }
 
 
   /* Contact */
@@ -460,6 +516,19 @@
     .menu-toggle.active .bar3{transform:rotate(-45deg) translate(4px,-4px)}
     .hero{padding-top:80px}
     section{padding-top:80px}
+    .album-layout{
+      grid-template-columns:1fr;
+    }
+    .album-vinyl-wrap{
+      border-right:none;
+      border-bottom:1px solid var(--line);
+      padding:28px;
+    }
+    .album-vinyl{
+      max-width:min(70vw,240px);
+    }
+    .album-block{padding:20px}
+    .album-cta{align-self:stretch;text-align:center}
   }
 </style>
 </head>
@@ -516,22 +585,30 @@
   <div class="sec-head">
     <h2><span class="num">02</span>Album — DAD</h2>
   </div>
-  <div class="album-block">
-    <p class="album-meta">Sorti le 09.10.2026 · 7 titres · ~40 min · Atmospheric Indie Rock</p>
-    <h3 class="album-title">« DAD » — le premier album de BUTERA, en vinyle.</h3>
-    <p class="album-desc">
-      7 titres, près de 40 minutes d'Atmospheric Indie Rock, entre mélancolie,
-      intensité et envolées mélodiques.
-    </p>
-    <p class="album-desc">
-      Un album intime autour de l'absence, des souvenirs et des liens qui
-      continuent d'exister malgré le temps.
-    </p>
-    <p class="album-desc">
-      Vinyle rouge · édition album DAD.<br />12" Gatefold 2 volets.
-    </p>
-    <div style="margin-top:28px">
-      <a class="listen-btn vinyl-btn" href="https://never-last-song.sumupstore.com/product/vinyle-butera-album-dad" target="_blank" rel="noopener">Acheter le vinyle</a>
+  <div class="album-layout">
+    <div class="album-vinyl-wrap">
+      <img class="album-vinyl" src="vinyle.png" alt="Vinyle de l'album DAD" loading="lazy" />
+    </div>
+    <div class="album-block">
+      <div class="album-tags">
+        <span class="album-tag">09.10.2026</span>
+        <span class="album-tag">7 titres</span>
+        <span class="album-tag">~40 min</span>
+        <span class="album-tag">Atmospheric Indie Rock</span>
+      </div>
+      <h3 class="album-title">« DAD » — le premier album de BUTERA, en vinyle.</h3>
+      <p class="album-desc">
+        Entre mélancolie, intensité et envolées mélodiques — une indie rock
+        atmosphérique à fleur de peau.
+      </p>
+      <p class="album-desc">
+        Un album intime autour de l'absence, des souvenirs et des liens qui
+        continuent d'exister malgré le temps.
+      </p>
+      <p class="album-format">
+        Vinyle rouge · édition album DAD · 12" Gatefold 2 volets.
+      </p>
+      <a class="listen-btn vinyl-btn album-cta" href="https://never-last-song.sumupstore.com/product/vinyle-butera-album-dad" target="_blank" rel="noopener">Acheter le vinyle</a>
     </div>
   </div>
 </section>
@@ -539,13 +616,46 @@
 <section id="dates" class="dates-bg">
   <div class="dates-inner">
     <div class="sec-head">
-      <h2><span class="num">03</span>Dates</h2>
+      <h2><span class="num">03</span>Dates 2026 - 2027</h2>
     </div>
     <!-- Ajouter / supprimer des lignes : copier un bloc .date-row-link -->
-    <a class="date-row-link" href="https://www.facebook.com/events/1605275937665019" target="_blank" rel="noopener">
+    <a class="date-row-link" data-event-date="2026-09-25" href="" target="_blank" rel="noopener">
+      <div class="date-row">
+        <span class="when">Sam. 25.09.2026</span>
+        <span class="where">Dour <span class="city">7370</span></span>
+        <span class="date-status" aria-live="polite"></span>
+        <span class="city">Belgique</span>
+      </div>
+    </a>
+    <a class="date-row-link" data-event-date="2026-09-26" href="" target="_blank" rel="noopener">
+      <div class="date-row">
+        <span class="when">Sam. 26.09.2026</span>
+        <span class="where">Hasnon <span class="city">59178</span></span>
+        <span class="date-status" aria-live="polite"></span>
+        <span class="city">France</span>
+      </div>
+    </a>
+    <a class="date-row-link" data-event-date="2026-10-09" href="" target="_blank" rel="noopener">
+      <div class="date-row">
+        <span class="when">Sam. 09.10.2026</span>
+        <span class="where">Audito — Tourcoing <span class="city">59599</span></span>
+        <span class="date-status" aria-live="polite"></span>
+        <span class="city">France</span>
+      </div>
+    </a>
+    <a class="date-row-link" data-event-date="2026-10-10" href="" target="_blank" rel="noopener">
+      <div class="date-row">
+        <span class="when">Sam. 10.10.2026</span>
+        <span class="where">Douai <span class="city">59178</span></span>
+        <span class="date-status" aria-live="polite"></span>
+        <span class="city">France</span>
+      </div>
+    </a>
+    <a class="date-row-link" data-event-date="2026-10-17" href="https://www.facebook.com/events/1605275937665019" target="_blank" rel="noopener">
       <div class="date-row">
         <span class="when">Sam. 17.10.2026</span>
         <span class="where">Chez Oscar — Marly <span class="city">59770</span></span>
+        <span class="date-status" aria-live="polite"></span>
         <span class="city">France</span>
       </div>
     </a>
@@ -676,6 +786,25 @@
       menuToggle.classList.remove('active');
       navLinksContainer.classList.remove('active');
     });
+  });
+
+  // Mark dates that are already past
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  document.querySelectorAll('.date-row-link[data-event-date]').forEach(link => {
+    const eventDate = new Date(`${link.dataset.eventDate}T00:00:00`);
+    if (Number.isNaN(eventDate.getTime())) {
+      return;
+    }
+
+    if (eventDate < today) {
+      link.classList.add('is-past');
+      const status = link.querySelector('.date-status');
+      if (status) {
+        status.textContent = 'Passé';
+      }
+    }
   });
 
   // Smooth scroll for all anchor links
