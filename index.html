@@ -168,6 +168,14 @@
 
   /* Boutique */
   .merch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+  .merch-image{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+    display:block;
+    border:1px solid var(--line);
+    margin-bottom:12px;
+  }
   .merch-item{
     border:1px solid var(--line);
     padding:20px;
@@ -289,6 +297,8 @@
   /* Réseaux */
   .socials{display:flex;flex-wrap:wrap;gap:12px}
   .socials a{
+    display:inline-flex;
+    align-items:center;
     border:1px solid var(--line);
     padding:10px 22px;
     font-size:.8rem;
@@ -358,6 +368,7 @@
     right:0;
     z-index:1000;
     background:rgba(10,10,11,.95);
+    opacity:.8;
     backdrop-filter:blur(10px);
     border-bottom:1px solid var(--line);
     padding:16px 24px;
@@ -366,13 +377,16 @@
     max-width:900px;
     margin:0 auto;
     display:flex;
-    justify-content:space-between;
+    justify-content:center;
     align-items:center;
+    position:relative;
   }
   .nav-links{
     display:flex;
     gap:24px;
     list-style:none;
+    justify-content:center;
+    align-items:center;
   }
   .nav-links a{
     font-size:.8rem;
@@ -388,15 +402,6 @@
     color:var(--accent);
     border-bottom:1px solid var(--accent);
   }
-  .nav-logo{
-    display:inline-block;
-    width:28px;
-    height:28px;
-    background:url("logo-BUTERA-vectoriel.png") center/contain no-repeat;
-    filter:brightness(0) invert(1);
-    opacity:.8;
-  }
-
   /* Mobile menu toggle */
   .menu-toggle{
     display:none;
@@ -406,6 +411,10 @@
     font-size:1.2rem;
     cursor:pointer;
     padding:8px;
+    position:absolute;
+    right:0;
+    top:50%;
+    transform:translateY(-50%);
   }
 
   @media (max-width: 768px){
@@ -423,6 +432,8 @@
       visibility:hidden;
       transform:translateY(-10px);
       transition:opacity .25s,visibility .25s,transform .25s;
+      align-items:center;
+      text-align:center;
     }
     .nav-links.active{
       opacity:1;
@@ -456,7 +467,6 @@
 
 <nav class="navbar" id="navbar">
   <div class="nav-inner">
-    <a href="#top" class="nav-logo" aria-label="BUTERA"></a>
     <button class="menu-toggle" id="menuToggle" aria-label="Menu">
       <span class="bar bar1"></span>
       <span class="bar bar2"></span>
@@ -548,14 +558,17 @@
   </div>
   <div class="merch-grid">
     <a class="merch-item" href="https://never-last-song.sumupstore.com/product/cd-butera-album-dad" target="_blank" rel="noopener">
+      <img class="merch-image" src="cd-dad.png" alt="CD DAD" loading="lazy" />
       <span class="merch-name">CD — DAD</span>
       <span class="merch-sub">Album · 7 titres</span>
     </a>
     <a class="merch-item" href="https://never-last-song.sumupstore.com/product/ep-butera-sad-addiction-live-session" target="_blank" rel="noopener">
+      <img class="merch-image" src="ep-live-session.png" alt="EP Live Session" loading="lazy" />
       <span class="merch-name">EP — SADaddiction live session</span>
       <span class="merch-sub">Live session</span>
     </a>
     <a class="merch-item" href="https://never-last-song.sumupstore.com/product/t-shirt-butera-no-need-to-talk-just-one-look-for-love" target="_blank" rel="noopener">
+      <img class="merch-image" src="tshirt-butera.png" alt="T-shirt BUTERA" loading="lazy" />
       <span class="merch-name">T-shirt BUTERA</span>
       <span class="merch-sub">No need to talk, just one look for love</span>
     </a>
@@ -587,8 +600,8 @@
     <h2><span class="num">06</span>Réseaux</h2>
   </div>
   <div class="socials">
-    <a href="https://www.instagram.com/buteraband/" target="_blank" rel="noopener">Instagram</a>
-    <a href="https://www.facebook.com/buteraband/" target="_blank" rel="noopener">Facebook</a>
+    <a href="https://www.instagram.com/buteraband/" target="_blank" rel="noopener"><img class="icon" src="https://cdn.simpleicons.org/instagram/9b978e" alt="" width="16" height="16" />Instagram</a>
+    <a href="https://www.facebook.com/buteraband/" target="_blank" rel="noopener"><img class="icon" src="https://cdn.simpleicons.org/facebook/9b978e" alt="" width="16" height="16" />Facebook</a>
   </div>
 
   <!-- Dernier post Facebook -->
