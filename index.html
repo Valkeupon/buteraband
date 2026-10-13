@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>BUTERA — Indie-Rock</title>
 <meta name="description" content="BUTERA — groupe d'indie rock. Dates, musique, boutique et contact." />
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v18.0" nonce="butera-nonce"></script>
 <style>
   :root{
     --bg:#0a0a0b;
@@ -298,6 +299,46 @@
   }
   .socials a:hover{color:var(--fg);border-color:var(--fg)}
 
+  /* Feed réseaux sociaux */
+  .social-feed {
+    margin-top: 40px;
+    border-top: 1px solid var(--line);
+    padding-top: 24px;
+  }
+  .feed-title {
+    font-size: 0.9rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+  .lightwidget-container {
+    background: var(--bg2);
+    border: 1px solid var(--line);
+    padding: 8px;
+  }
+  .lightwidget-container iframe {
+    width: 100%;
+    border: 0;
+    overflow: hidden;
+    height: 300px;
+  }
+  .fb-page {
+    background: var(--bg2);
+    border: 1px solid var(--line);
+    padding: 8px;
+  }
+  .fb-page span {
+    display: none !important;
+  }
+  .fb_iframe_widget {
+    background: transparent !important;
+  }
+  .fb_iframe_widget iframe {
+    background: var(--bg2) !important;
+  }
+
   /* Footer */
   footer{
     border-top:1px solid var(--line);
@@ -426,6 +467,32 @@
   <div class="socials">
     <a href="https://www.instagram.com/buteraband/" target="_blank" rel="noopener">Instagram</a>
     <a href="https://www.facebook.com/buteraband/" target="_blank" rel="noopener">Facebook</a>
+  </div>
+
+  <!-- Feed Instagram (Lightwidget) -->
+  <div class="social-feed instagram-feed">
+    <h3 class="feed-title">✦ Dernières photos Instagram</h3>
+    <div class="lightwidget-container">
+      <iframe src="//lightwidget.com/widgets/8a5f4d3c2f3e5c2e9d8b456714456789.html"
+              scrolling="no" allowtransparency="true"
+              class="lightwidget-widget">
+      </iframe>
+    </div>
+  </div>
+
+  <!-- Dernier post Facebook -->
+  <div class="social-feed facebook-feed">
+    <h3 class="feed-title">✦ Dernier post Facebook</h3>
+    <div class="fb-page"
+         data-href="https://www.facebook.com/buteraband/"
+         data-tabs="timeline"
+         data-width=""
+         data-height="400"
+         data-small-header="true"
+         data-adapt-container-width="true"
+         data-hide-cover="true"
+         data-show-facepile="false">
+    </div>
   </div>
 </section>
 
