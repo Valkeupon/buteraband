@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>BUTERA â Indie-Rock</title>
-<meta name="description" content="BUTERA â groupe d'indie rock. Dates, musique, boutique et contact." />
+<title>BUTERA — Indie-Rock</title>
+<meta name="description" content="BUTERA — groupe d'indie rock. Dates, musique, boutique et contact." />
 <style>
   :root{
     --bg:#0a0a0b;
@@ -35,15 +35,15 @@
     justify-content:center;
     align-items:center;
     text-align:center;
-    padding:24px;
+    padding: 24px 24px 160px;
     position:relative;
   }
   .hero::before{
     content:"";
     position:absolute;
-    inset:-15% 0;
-    background:url("BUT3.jpg") center/cover no-repeat;
-    opacity:.45;
+    inset: 0 0;
+    background:url("BUT3.jpg") top/cover no-repeat;
+    opacity:.65;
     pointer-events:none;
   }
   .hero::after{
@@ -55,7 +55,6 @@
     pointer-events:none;
   }
   .hero h1,.hero p,.hero .scroll,.logo-box{position:relative;z-index:1}
-  .hero-cta{margin-top:32px;position:relative;z-index:1}
   .hero-sub{
     color:var(--fg);
     letter-spacing:.35em;
@@ -69,12 +68,11 @@
     padding:28px 48px;
     max-width:88vw;
   }
+
   .logo{
     display:block;
     width:clamp(300px,60vw,640px);
     height:auto;
-    will-change:transform;
-    transform:translateY(var(--parallax,0px));
   }
   .slogan{
     margin-top:28px;
@@ -93,7 +91,7 @@
   }
   .hero p{
     margin-top:20px;
-    color:var(--muted);
+    color:var(--fg);
     letter-spacing:.35em;
     text-transform:uppercase;
     font-size:.85rem;
@@ -101,7 +99,9 @@
   }
   .hero .scroll{
     position:absolute;bottom:32px;
-    color:var(--muted);
+    color:var(--fg);
+    background-color:rgba(10,10,11,.7);
+    padding:8px 14px;
     font-size:.75rem;
     letter-spacing:.25em;
     animation:pulse 2.4s infinite;
@@ -130,6 +130,34 @@
   .date-row .where{flex:1}
   .date-row .city{color:var(--muted);font-size:.85rem}
   .empty{color:var(--muted);font-style:italic;padding:24px 0}
+
+  /* Dates — fond photo plein écran */
+  .dates-bg{
+    position:relative;
+    max-width:none;
+    padding:0;
+    background:url("live.jpg") center bottom/cover no-repeat;
+  }
+  .dates-bg::before{
+    content:"";
+    position:absolute;inset:0;
+    background:
+      radial-gradient(ellipse 90% 60% at 50% 110%, rgba(201,70,45,.14), transparent 60%),
+      linear-gradient(rgba(10,10,11,.82), rgba(10,10,11,.88));
+    pointer-events:none;
+  }
+  .dates-inner{
+    position:relative;
+    z-index:1;
+    max-width:900px;
+    margin:0 auto;
+    padding:96px 24px;
+  }
+  .dates-inner .sec-head h2,
+  .dates-inner .date-row .where{text-shadow:0 1px 12px rgba(0,0,0,.8)}
+
+  /* Bio */
+  .bio-desc{color:var(--fg);opacity:.85;margin-bottom:12px;max-width:640px}
 
   /* Album */
   .album-block{max-width:640px}
@@ -160,9 +188,63 @@
   .platforms-btn:hover{border-color:var(--accent);background:var(--accent);color:#fff}
 
   /* Musique */
-  .music-grid{display:grid;gap:24px}
-  .listen-btn{
+  .studio-banner{
+    position:relative;
+    width:100%;
+    height:clamp(220px,38vw,420px);
+    overflow:hidden;
+    border:1px solid var(--line);
+    margin-bottom:32px;
+  }
+  .studio-banner .studio-photo{
+    width:100%;height:100%;
+    object-fit:cover;
+    display:block;
+    filter:grayscale(.2) contrast(1.05);
+  }
+  .studio-banner::after{
+    content:"";
+    position:absolute;inset:0;
+    background:linear-gradient(to top, rgba(10,10,11,.85), rgba(10,10,11,.05) 55%);
+  }
+  .music-grid{
+    position:absolute;
+    left:20px;
+    right:20px;
+    bottom:16px;
+    z-index:1;
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    align-items:center;
+  }
+  .music-grid a{
+    display:inline-flex;
+    align-items:center;
+    border:1px solid rgba(232,230,225,.45);
+    background:rgba(10,10,11,.6);
+    backdrop-filter:blur(4px);
+    padding:10px 16px;
+    font-size:.75rem;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--fg);
+    transition:color .25s,border-color .25s,background .25s;
+  }
+  .music-grid a:hover{border-color:var(--accent);background:var(--accent);color:#fff}
+  .music-note{
+    color:var(--muted);
+    margin-bottom:18px;
+    font-size:.95rem;
+  }
+  .icon{
+    width:16px;height:16px;
     display:inline-block;
+    margin-right:10px;
+  }
+  .listen-btn{
+    display:inline-flex;
+    align-items:center;
     border:1px solid var(--line);
     padding:14px 28px;
     letter-spacing:.2em;
@@ -171,30 +253,39 @@
     transition:border-color .25s,background .25s,color .25s;
   }
   .listen-btn:hover{border-color:var(--accent);background:var(--accent);color:#fff}
-  .platforms{margin-top:32px;display:flex;flex-wrap:wrap;gap:12px}
-  .platforms a{
-    border:1px solid var(--line);
-    padding:8px 18px;
-    font-size:.8rem;
-    letter-spacing:.12em;
-    text-transform:uppercase;
-    color:var(--muted);
-    transition:color .25s,border-color .25s;
-  }
-  .platforms a:hover{color:var(--fg);border-color:var(--fg)}
+  .vinyl-btn{border-color:var(--accent);background:var(--accent);color:#fff}
+
 
   /* Contact */
+  #contact{
+    max-width:none;
+    min-height:clamp(520px,78vh,860px);
+    padding:42px 24px 96px;
+    background:
+      linear-gradient(to bottom, rgba(10,10,11,.88) 0%, rgba(10,10,11,.68) 28%, rgba(10,10,11,.38) 55%, rgba(10,10,11,.52) 100%),
+      url("live-1.jpg") center 38%/cover no-repeat;
+  }
+  .contact-inner{
+    max-width:900px;
+    margin:0 auto;
+  }
   .contact-mail{
     font-size:clamp(1.4rem,4vw,2.4rem);
     letter-spacing:.05em;
     border-bottom:1px solid var(--accent);
     padding-bottom:4px;
     transition:color .25s;
+    text-shadow:0 1px 8px rgba(0,0,0,.8);
   }
   .contact-mail:hover{color:var(--accent)}
-  .contact-note{margin-top:16px;color:var(--muted);font-size:.9rem}
+  .contact-note{
+    margin-top:16px;
+    color:var(--fg);
+    font-size:.9rem;
+    text-shadow:0 1px 8px rgba(0,0,0,.8);
+  }
 
-  /* RÃ©seaux */
+  /* Réseaux */
   .socials{display:flex;flex-wrap:wrap;gap:12px}
   .socials a{
     border:1px solid var(--line);
@@ -222,66 +313,83 @@
 <body>
 
 <header class="hero" id="top">
-  <p class="hero-sub">Indie Rock Â· Nouvel album Â« DAD Â» disponible</p>
+  <p class="hero-sub">Nouvel album « DAD » disponible</p>
   <div class="logo-box">
     <img class="logo" src="logo-BUTERA-vectoriel.png" alt="BUTERA" />
   </div>
   <p class="slogan">No need to talk, just one look for <span class="love">LOVE</span></p>
-  <div class="hero-cta">
-    <a class="listen-btn" href="https://never-last-song.sumupstore.com/product/vinyle-butera-album-dad" target="_blank" rel="noopener">Acheter le vinyle</a>
-  </div>
-  <span class="scroll">â</span>
+  <a class="scroll" href="#album" aria-label="Aller à l’album">↓</a>
 </header>
+
+<section id="bio">
+  <div class="sec-head">
+    <h2><span class="num">01</span>Biographie</h2>
+  </div>
+  <p class="bio-desc">
+    Né en 2023 sur les scènes lilloises de la rencontre d’artistes aux parcours
+    variés, réunis par une même exigence sonore et émotionnelle, le quatuor
+    construit rapidement une identité forte : un rock intense et organique.
+    Il est ici question de privilégier l’impact, la tension et la sincérité —
+    ce, sans concession.
+  </p>
+  <p class="bio-desc">
+    Le nom du projet renvoie à un lieu réel, pensé comme le point de départ
+    d’une aventure humaine et musicale. Un socle solide pour l’identité du
+    groupe.
+  </p>
+</section>
 
 <section id="album">
   <div class="sec-head">
-    <h2><span class="num">01</span>Album â DAD</h2>
+    <h2><span class="num">02</span>Album — DAD</h2>
   </div>
   <div class="album-block">
-    <p class="album-meta">Sorti le 09.10.2026 Â· 7 titres Â· ~40 min Â· Atmospheric Indie Rock</p>
-    <h3 class="album-title">Â« DAD Â» â le premier album de BUTERA, en vinyle.</h3>
+    <p class="album-meta">Sorti le 09.10.2026 · 7 titres · ~40 min · Atmospheric Indie Rock</p>
+    <h3 class="album-title">« DAD » — le premier album de BUTERA, en vinyle.</h3>
     <p class="album-desc">
-      7 titres, prÃ¨s de 40 minutes d'Atmospheric Indie Rock, entre mÃ©lancolie,
-      intensitÃ© et envolÃ©es mÃ©lodiques.
+      7 titres, près de 40 minutes d'Atmospheric Indie Rock, entre mélancolie,
+      intensité et envolées mélodiques.
     </p>
     <p class="album-desc">
       Un album intime autour de l'absence, des souvenirs et des liens qui
-      continuent d'exister malgrÃ© le temps.
+      continuent d'exister malgré le temps.
     </p>
     <p class="album-desc">
-      Vinyle rouge Â· Ã©dition album DAD.<br />12" Gatefold 2 volets.
+      Vinyle rouge · édition album DAD.<br />12" Gatefold 2 volets.
     </p>
     <div style="margin-top:28px">
-      <a class="listen-btn" href="https://never-last-song.sumupstore.com/product/vinyle-butera-album-dad" target="_blank" rel="noopener">Acheter le vinyle</a>
+      <a class="listen-btn vinyl-btn" href="https://never-last-song.sumupstore.com/product/vinyle-butera-album-dad" target="_blank" rel="noopener">Acheter le vinyle</a>
     </div>
   </div>
 </section>
 
-<section id="dates">
-  <div class="sec-head">
-    <h2><span class="num">02</span>Dates</h2>
-  </div>
-  <!-- Ajouter / supprimer des lignes : copier un bloc .date-row-link -->
-  <a class="date-row-link" href="https://www.facebook.com/events/1605275937665019" target="_blank" rel="noopener">
-    <div class="date-row">
-      <span class="when">Sam. 17.10.2026</span>
-      <span class="where">Chez Oscar â Marly <span class="city">59770</span></span>
-      <span class="city">France</span>
+<section id="dates" class="dates-bg">
+  <div class="dates-inner">
+    <div class="sec-head">
+      <h2><span class="num">03</span>Dates</h2>
     </div>
-  </a>
+    <!-- Ajouter / supprimer des lignes : copier un bloc .date-row-link -->
+    <a class="date-row-link" href="https://www.facebook.com/events/1605275937665019" target="_blank" rel="noopener">
+      <div class="date-row">
+        <span class="when">Sam. 17.10.2026</span>
+        <span class="where">Chez Oscar — Marly <span class="city">59770</span></span>
+        <span class="city">France</span>
+      </div>
+    </a>
+  </div>
 </section>
 
 <section id="merch">
   <div class="sec-head">
-    <h2><span class="num">03</span>Boutique</h2>
+    <h2><span class="num">04</span>Boutique</h2>
   </div>
   <div class="merch-grid">
     <a class="merch-item" href="https://never-last-song.sumupstore.com/product/cd-butera-album-dad" target="_blank" rel="noopener">
-      <span class="merch-name">CD â DAD</span>
-      <span class="merch-sub">Album Â· 7 titres</span>
+      <span class="merch-name">CD — DAD</span>
+      <span class="merch-sub">Album · 7 titres</span>
     </a>
     <a class="merch-item" href="https://never-last-song.sumupstore.com/product/ep-butera-sad-addiction-live-session" target="_blank" rel="noopener">
-      <span class="merch-name">EP â SADaddiction live session</span>
+      <span class="merch-name">EP — SADaddiction live session</span>
       <span class="merch-sub">Live session</span>
     </a>
     <a class="merch-item" href="https://never-last-song.sumupstore.com/product/t-shirt-butera-no-need-to-talk-just-one-look-for-love" target="_blank" rel="noopener">
@@ -296,53 +404,44 @@
 
 <section id="musique">
   <div class="sec-head">
-    <h2><span class="num">04</span>Musique</h2>
+    <h2><span class="num">05</span>Musique</h2>
   </div>
-  <div class="music-grid">
-    <div>
-      <a class="listen-btn" href="https://buteraband.bandcamp.com/" target="_blank" rel="noopener">Ãcouter sur Bandcamp</a>
+  <p class="music-note">Ecouter notre musique sur les plateformes de streaming.</p>
+  <div class="studio-banner">
+    <img class="studio-photo" src="studio.jpg" alt="BUTERA en studio d'enregistrement" loading="lazy" />
+    <div class="music-grid">
+      <a href="https://buteraband.bandcamp.com/" target="_blank" rel="noopener"><img class="icon" src="https://cdn.simpleicons.org/bandcamp/e8e6e1" alt="" width="16" height="16" />Bandcamp</a>
+      <a href="https://li.sten.to/BUTERA" target="_blank" rel="noopener"><img class="icon" src="https://cdn.simpleicons.org/spotify/e8e6e1" alt="" width="16" height="16" />Spotify</a>
+      <a href="https://li.sten.to/BUTERA" target="_blank" rel="noopener"><img class="icon" src="https://cdn.simpleicons.org/deezer/e8e6e1" alt="" width="16" height="16" />Deezer</a>
+      <a href="https://li.sten.to/BUTERA" target="_blank" rel="noopener"><img class="icon" src="https://cdn.simpleicons.org/youtube/e8e6e1" alt="" width="16" height="16" />YouTube</a>
+      <a href="https://li.sten.to/BUTERA" target="_blank" rel="noopener"><img class="icon" src="https://cdn.simpleicons.org/applemusic/e8e6e1" alt="" width="16" height="16" />Apple Music</a>
     </div>
-    <div class="platforms">
-      <a href="https://li.sten.to/BUTERA" target="_blank" rel="noopener">Toutes les plateformes</a>
-      <a href="https://li.sten.to/BUTERA" target="_blank" rel="noopener">Spotify</a>
-      <a href="https://li.sten.to/BUTERA" target="_blank" rel="noopener">Deezer</a>
-      <a href="https://li.sten.to/BUTERA" target="_blank" rel="noopener">YouTube</a>
-      <a href="https://li.sten.to/BUTERA" target="_blank" rel="noopener">Apple Music</a>
-    </div>
   </div>
-</section>
-
-<section id="contact">
-  <div class="sec-head">
-    <h2><span class="num">05</span>Contact</h2>
-  </div>
-  <a class="contact-mail" href="mailto:buteraband@gmail.com">buteraband@gmail.com</a>
-  <p class="contact-note">Pour booking, presse ou toute autre demande.</p>
 </section>
 
 <section id="reseaux">
   <div class="sec-head">
-    <h2><span class="num">06</span>RÃ©seaux</h2>
+    <h2><span class="num">06</span>Réseaux</h2>
   </div>
   <div class="socials">
     <a href="https://www.instagram.com/buteraband/" target="_blank" rel="noopener">Instagram</a>
     <a href="https://www.facebook.com/buteraband/" target="_blank" rel="noopener">Facebook</a>
-    <a href="https://buteraband.bandcamp.com/" target="_blank" rel="noopener">Bandcamp</a>
   </div>
 </section>
 
-<footer>Â© BUTERA â Tous droits rÃ©servÃ©s</footer>
+<section id="contact" aria-label="Contact BUTERA">
+  <div class="contact-inner">
+    <div class="sec-head">
+      <h2><span class="num">07</span>Contact</h2>
+    </div>
+    <a class="contact-mail" href="mailto:buteraband@gmail.com">buteraband@gmail.com</a>
+    <p class="contact-note">Pour booking, presse ou toute autre demande.</p>
+  </div>
+</section>
 
-<script>
-  // Parallax : le logo glisse lÃ©gÃ¨rement plus lentement que le scroll
-  const logo = document.querySelector(".logo");
-  window.addEventListener("scroll", () => {
-    const y = window.scrollY;
-    if (y < window.innerHeight) {
-      logo.style.setProperty("--parallax", y * 0.15 + "px");
-    }
-  }, { passive: true });
-</script>
+<footer>© BUTERA — Tous droits réservés</footer>
+
+
 
 </body>
 </html>
