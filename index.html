@@ -40,10 +40,13 @@
   }
   .hero::before{
     content:"";
-    position:absolute;inset:0;
+    position:absolute;
+    inset:-15% 0;
     background:url("BUT3.jpg") center/cover no-repeat;
     opacity:.45;
     pointer-events:none;
+    will-change:transform;
+    transform:translateY(var(--parallax,0px));
   }
   .hero::after{
     content:"";
@@ -54,6 +57,7 @@
     pointer-events:none;
   }
   .hero h1,.hero p,.hero .scroll,.logo-box{position:relative;z-index:1}
+  .hero-cta{margin-top:32px;position:relative;z-index:1}
   .hero-sub{
     color:var(--fg);
     letter-spacing:.35em;
@@ -221,15 +225,18 @@
 <header class="hero" id="top">
   <p class="hero-sub">Indie Rock · Nouvel album « DAD » disponible</p>
   <div class="logo-box">
-    <img class="logo" src="logo-BUTERA-vectoriel.png" alt="BUTERA" />
+    <img class="logo" src="BUTERA_noir_sans_fond.png" alt="BUTERA" />
   </div>
   <p class="slogan">No need to talk, just one look for <span class="love">LOVE</span></p>
+  <div class="hero-cta">
+    <a class="listen-btn" href="https://never-last-song.sumupstore.com/product/vinyle-butera-album-dad" target="_blank" rel="noopener">Acheter le vinyle</a>
+  </div>
   <span class="scroll">↓</span>
 </header>
 
 <section id="album">
   <div class="sec-head">
-    <h2><span class="num">02</span>Album — DAD</h2>
+    <h2><span class="num">01</span>Album — DAD</h2>
   </div>
   <div class="album-block">
     <p class="album-meta">Sorti le 09.10.2026 · 7 titres · ~40 min · Atmospheric Indie Rock</p>
@@ -253,9 +260,9 @@
 
 <section id="dates">
   <div class="sec-head">
-    <h2><span class="num">01</span>Dates</h2>
+    <h2><span class="num">02</span>Dates</h2>
   </div>
-  <!-- Ajouter / supprimer des lignes : copier un bloc .date-row -->
+  <!-- Ajouter / supprimer des lignes : copier un bloc .date-row-link -->
   <a class="date-row-link" href="https://www.facebook.com/events/1605275937665019" target="_blank" rel="noopener">
     <div class="date-row">
       <span class="when">Sam. 17.10.2026</span>
@@ -326,6 +333,17 @@
 </section>
 
 <footer>© BUTERA — Tous droits réservés</footer>
+
+<script>
+  // Parallax : l'image de fond glisse plus lentement que le scroll
+  const hero = document.querySelector(".hero");
+  window.addEventListener("scroll", () => {
+    const y = window.scrollY;
+    if (y < window.innerHeight) {
+      hero.style.setProperty("--parallax", y * 0.3 + "px");
+    }
+  }, { passive: true });
+</script>
 
 </body>
 </html>
